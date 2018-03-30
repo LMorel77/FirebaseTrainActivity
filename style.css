@@ -1,0 +1,37 @@
+/* General Styling */
+body {
+    background: url("./images/backgroundimage.png");
+    font-family: 'Lato', sans-serif;
+    /* font-size: 14px; */
+}
+
+/* Bootstrap Jumbotron and Panel Styling */
+.jumbotron {
+    background: url("./images/headerimage.jpg");
+    background-size: 100% 100%;
+}
+.jumbotron h1 {
+    color: white;
+    letter-spacing: 10px;
+    font-family: 'Righteous', cursive;
+    margin: 0 auto;
+}
+.panel-body {
+    padding: 5px 15px;
+}
+.panel-primary {
+    border-color: rgb(32,64,95);
+}
+.panel-primary > .panel-heading {
+    background-color: rgb(32,64,95); /* For browsers that don't support gradient coloring */
+    background: linear-gradient(to right, rgba(32,64,95), rgb(95, 133, 173));
+    font-size: 16px;
+    padding: 5px 15px;
+} 
+
+/* Button Styling */
+.btn-primary {
+    background-color: rgb(32,64,95);
+    margin-bottom: 5px;
+    width: 100px;
+}
