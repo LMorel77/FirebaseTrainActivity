@@ -8,6 +8,7 @@ $(document).ready(function(){
 
         if (snapshot.child("trainInfo").exists()) {
 
+            // Copy Firebase Data Into Local Object Array and Print to HTML
             trainSchedule = snapshot.val().trainInfo;
             updateWebPage(trainSchedule);
 
@@ -62,6 +63,7 @@ $(document).ready(function(){
 
     });
 
+    // Update the Schedule on the Web Page
     function updateWebPage(objectArray) {
 
         $("#train-schedule").empty();
@@ -71,6 +73,7 @@ $(document).ready(function(){
             var tFreq = objectArray[i].frequency;
             var tFirst = objectArray[i].firstTrain;
     
+            // Performing Time Calculations
             var timeDiff = moment().diff(moment.unix(tFirst), "minutes");
             var tRemain = moment().diff(moment.unix(tFirst), "minutes") % tFreq;
             var tMinutes = tFreq - tRemain;
@@ -94,23 +97,32 @@ $(document).ready(function(){
         // Preventing page refresh
         event.preventDefault();
 
+        // Gather New Train Input
         var tNameInput = $("#train-name-input").val().trim();
         var tDestInput = $("#destination-input").val().trim();
-        var tTimeInput = moment($("#train-time-input").val().trim(), "HH:mm").subtract(10, "years").format("X");
         var tFreqInput = $("#frequency-input").val().trim();
+        var tTimeInput = moment($("#train-time-input").val().trim(), "HH:mm").subtract(10, "years").format("X");
 
+        // Stop code execution if fields are blank
+        if (tNameInput === "" && tDestInput === "" && tFreqInput === "" && tTimeInput === "") {
+            return;
+        }
+
+        // Store New Train In New Object
         var newTrain = {
             trainName: tNameInput,
             destination: tDestInput,
-            frequency: tTimeInput,
-            firstTrain: tFreqInput
+            frequency: tFreqInput,
+            firstTrain: tTimeInput
         }
 
+        // Add New Train to Object Array and Update Firebase
         trainSchedule.push(newTrain);
         database.ref().update({
             trainInfo: trainSchedule
         });
 
+        // Clear Input Fields
         $("#train-name-input").val("");
         $("#destination-input").val("");
         $("#train-time-input").val("");
