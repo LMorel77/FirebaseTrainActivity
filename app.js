@@ -75,7 +75,6 @@ $(document).ready(function(){
             var tRemain = moment().diff(moment.unix(tFirst), "minutes") % tFreq;
             var tMinutes = tFreq - tRemain;
             var tArrival = moment().add(tMinutes, "m").format("hh:mm A");
-    
             
             // Update Schedule on Web Page
             var tableRow = $("<tr>");
@@ -110,7 +109,7 @@ $(document).ready(function(){
         trainSchedule.push(newTrain);
         database.ref().update({
             trainInfo: trainSchedule
-        })
+        });
 
         $("#train-name-input").val("");
         $("#destination-input").val("");
@@ -118,7 +117,5 @@ $(document).ready(function(){
         $("#frequency-input").val("");
 
     });
-
-
 
 });
